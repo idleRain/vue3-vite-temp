@@ -1,0 +1,6 @@
+node_modules
+dist
+auto-imports.d.ts
+components.d.ts
+src/components/ui
+.eslintrc-auto-import.js

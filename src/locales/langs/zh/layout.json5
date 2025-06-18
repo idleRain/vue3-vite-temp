@@ -1,0 +1,10 @@
+{
+  // layout 中文语言包
+  "home": "首页",
+  "inbox": "收件箱",
+  "calendar": "日历",
+  "search": "搜索",
+  "settings": "设置",
+  "application": "应用",
+  "languageSwitch": "切换语言"
+}
