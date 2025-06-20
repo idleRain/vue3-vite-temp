@@ -1,58 +1,16 @@
-<script setup lang="ts">
-import type { Example } from '@/types'
-import { local } from '@/utils/storage'
-import { ElMessage } from 'element-plus'
-import { SupportedLanguagesType } from '@/locales/typing'
-import API from '@/api'
-
+<script lang="ts" setup>
 defineOptions({ name: 'Example' })
 
 const { t } = useI18n()
-const example = reactive<Example>({
-  name: 'Vite + Vue',
-  age: 18,
-  description: '示例',
-  code: '404 not found'
-})
-
-console.log('App.vue', example)
-
-const lang = ref(local.get('lang') ?? import.meta.env.VITE_APP_LOCALE)
-
-const changeLanguage = (lang: SupportedLanguagesType) => {
-  local.set('lang', lang)
-  location.reload()
-}
-
-const send = async () => {
-  try {
-    const { data } = await API.example.getHello()
-    ElMessage.success(data)
-  } catch {
-    ElMessage.error('请求失败')
-  }
-}
 </script>
 
 <template>
-  <el-card>
-    <div class="text-red-500">
-      {{ example.name }}
+  <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
+    <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+      <div class="aspect-video rounded-xl bg-muted/50">{{ t('example.send') }}</div>
+      <div class="aspect-video rounded-xl bg-muted/50">{{ t('layout.playground') }}</div>
+      <div class="aspect-video rounded-xl bg-muted/50" />
     </div>
-    <div class="text-blue-300">{{ t('test.name') }}</div>
-
-    <div class="mt-[20px]">
-      <span>{{ t('layout.languageSwitch') }}：</span>
-      <el-select v-model="lang" placeholder="切换语言" @change="changeLanguage">
-        <el-option label="中文" value="zh" />
-        <el-option label="English" value="en" />
-      </el-select>
-    </div>
-
-    <div class="mt-[20px]">
-      <el-button @click="send">点击发起请求</el-button>
-    </div>
-  </el-card>
+    <div class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+  </div>
 </template>
-
-<style scoped></style>

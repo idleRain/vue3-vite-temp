@@ -3,7 +3,7 @@
 ## 项目概述
 基于 Vue3 + Vite 的现代化前端开发模板，集成以下技术栈：
 - 🚀 Vue 3 组合式API开发模式
-- ⚡ Vite 6 构建工具
+- ⚡ Rolldown-Vite 构建工具
 - 🎨 Tailwind CSS 原子化样式方案
 - 💅 Shadcn-vue 组件库
 - 📦 Pinia 状态管理
@@ -39,7 +39,7 @@ npm run build
 ## 环境配置
 复制并重命名环境文件：
 ```bash
-cp .env.example .env
+cp .env
 ```
 按需修改以下配置：
 ```ini

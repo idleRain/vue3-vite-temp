@@ -29,10 +29,5 @@
     "./components.d.ts",
     "typings/*.d.ts",
     "vite.config.ts"
-  ],
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
   ]
 }

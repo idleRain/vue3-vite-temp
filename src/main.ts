@@ -1,10 +1,9 @@
 import { createApp } from 'vue'
 import '@/styles/index.css'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import pinia from '@/store'
 import router from '@/router'
-import { setupI18n } from '@/locales'
+import { setupI18n } from '@/i18n'
 import App from './App.vue'
 
 const bootstrap = async () => {
@@ -23,7 +22,6 @@ const bootstrap = async () => {
 
   app.use(pinia)
   app.use(router)
-  app.use(ElementPlus)
   await setupI18n(app)
 
   app.mount('#app')

@@ -1,0 +1,33 @@
+{
+  /* 编辑器配置 */
+  "editor.formatOnSave": true,
+  // 保存时自动修复
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.useEditorConfig": true,
+  "eslint.enable": true,
+  // eslint 保存时自动修复
+  "eslint.format.enable": true,
+
+  /* i18n Ally 基础配置 */
+  // key 匹配的路径形式
+  "i18n-ally.keystyle": "nested",
+  // 翻译源语言
+  "i18n-ally.sourceLanguage": "zh",
+  // 语言包路径
+  "i18n-ally.localesPaths": "src/locales",
+  // 匹配语言文件夹和嵌套JSON文件
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.*",
+  // 显示的语言
+  "i18n-ally.displayLanguage": "zh",
+  // Vue-i18n 支持
+  "i18n-ally.extract.autoDetect": true,
+  // 指定启用的文件格式
+  "i18n-ally.enabledParsers": ["json", "json5", "yaml", "js", "ts"],
+  // 指定使用的框架
+  "i18n-ally.enabledFrameworks": ["vue"],
+  // 命名空间
+  "i18n-ally.namespace": true
+}
