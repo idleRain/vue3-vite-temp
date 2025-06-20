@@ -2,7 +2,7 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-
+    "composite": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -10,6 +10,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "noEmit": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],

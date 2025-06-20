@@ -39,9 +39,20 @@ export default defineConfig([
       // 组件命名方式
       'vue/component-name-in-template-casing': [
         'error',
-        'kebab-case', // 分隔命名
-        // 'PascalCase', // 大驼峰
+        // 'kebab-case', // 分隔命名
+        'PascalCase', // 大驼峰
         { registeredComponentsOnly: false, ignores: [] }
+      ],
+      // 空标签自闭合
+      'vue/html-self-closing': [
+        'warn',
+        {
+          html: {
+            void: 'always',
+            normal: 'always',
+            component: 'always'
+          }
+        }
       ],
       // 允许使用 this
       '@typescript-eslint/no-this-alias': [

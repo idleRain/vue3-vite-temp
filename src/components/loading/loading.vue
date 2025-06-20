@@ -1,52 +1,35 @@
 <template>
   <div class="fixed inset-0 flex justify-center items-center bg-[#fff9] z-[9999]">
-    <div class="loader w-[40px] h-[40px]"></div>
+    <div
+      class="loader grid w-[50px] h-[50px] border-4 border-transparent rounded-full border-r-[#25b09b]"
+    />
   </div>
 </template>
 
 <style scoped>
 .loader {
-  --c: no-repeat orange;
-  background: var(--c), var(--c), var(--c), var(--c);
-  background-size: 21px 21px;
-  animation: l5 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+  aspect-ratio: 1;
+  animation: l15 1s infinite linear;
 }
 
-@keyframes l5 {
-  0% {
-    background-position:
-      0 0,
-      100% 0,
-      100% 100%,
-      0 100%;
-  }
+.loader::before,
+.loader::after {
+  content: '';
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
 
-  33% {
-    background-position:
-      0 0,
-      100% 0,
-      100% 100%,
-      0 100%;
-    width: 60px;
-    height: 60px;
-  }
+.loader::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
 
-  66% {
-    background-position:
-      100% 0,
-      100% 100%,
-      0 100%,
-      0 0;
-    width: 60px;
-    height: 60px;
-  }
-
+@keyframes l15 {
   100% {
-    background-position:
-      100% 0,
-      100% 100%,
-      0 100%,
-      0 0;
+    transform: rotate(1turn);
   }
 }
 </style>

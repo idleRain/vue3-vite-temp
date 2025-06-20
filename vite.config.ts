@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from 'vite'
+import { type ConfigEnv, defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -8,10 +8,10 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import ViteJson5 from 'vite-plugin-json5'
 
 // https://vite.dev/config/
-export default ({ mode }: { mode: string; command: string }) => {
+export default ({ mode }: ConfigEnv) => {
   const env = loadEnv(mode, process.cwd())
   return defineConfig({
-    base: './',
+    base: '/',
     plugins: [
       vue(),
       tailwindcss(),
@@ -23,11 +23,13 @@ export default ({ mode }: { mode: string; command: string }) => {
           enabled: true,
           filepath: './.eslintrc-auto-import.js',
           globalsPropValue: true
-        }
+        },
+        resolvers: [ElementPlusResolver()]
       }),
       Components({
         dirs: [resolve(__dirname, 'src/components/**')],
         extensions: ['vue'],
+        deep: true,
         dts: true,
         resolvers: [ElementPlusResolver()]
       })
@@ -56,11 +58,25 @@ export default ({ mode }: { mode: string; command: string }) => {
     },
     build: {
       sourcemap: mode === 'dev',
+      assetsDir: 'static/js',
       rollupOptions: {
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          // 单独打包的模块
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'pinia', 'vue-i18n'],
+            elementPlus: ['element-plus']
+          }
+        }
+      },
+      // 打包去掉 console 和 debugger
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
         }
       }
     }
