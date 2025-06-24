@@ -35,7 +35,21 @@ const prettierConfig = {
   // Vue文件脚本和样式标签缩进
   vueIndentScriptAndStyle: false,
   // 换行符使用 lf 结尾是 可选值"<auto|lf|crlf|cr>"
-  endOfLine: 'auto'
+  endOfLine: 'auto',
+  // css 方言
+  cssEnable: ['css', 'scss', 'less'],
+  // 插件
+  plugins: [
+    // tailwindcss 类名排序
+    'prettier-plugin-tailwindcss',
+    // css 属性
+    'prettier-plugin-css-order',
+    // 导入排序
+    './node_modules/prettier-plugin-sort-imports/dist/index.js'
+  ],
+  tailwindConfig: './tailwind.config.js',
+  tailwindStylesheet: './src/styles/index.css',
+  tailwindFunctions: ['clsx']
 }
 
 export default prettierConfig
