@@ -1,3 +1,5 @@
 {
-  playground: "Playground"
+  // zhushi
+  playground: 'Playground',
+  languageSwitch: 'Switch Languages'
 }

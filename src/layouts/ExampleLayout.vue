@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppSidebar from './components/AppSidebar.vue'
 import AppHeader from '@/layouts/components/AppHeader.vue'
+import AppSidebar from './components/AppSidebar.vue'
 
 defineOptions({ name: 'ExampleLayout' })
 </script>

@@ -3,7 +3,7 @@ import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from '
 
 import { useSidebar } from '$ui/sidebar'
 
-const props = defineProps<{
+defineProps<{
   user: {
     name: string
     email: string

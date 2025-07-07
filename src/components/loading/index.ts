@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
 import LoadingComponent from './loading.vue'
+import { createApp } from 'vue'
 
 let loadingInstance: any = null
 

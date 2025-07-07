@@ -1,30 +1,30 @@
 <template>
-  <div class="fixed inset-0 flex justify-center items-center bg-[#fff9] z-[9999]">
+  <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#fff9]">
     <div
-      class="loader grid w-[50px] h-[50px] border-4 border-transparent rounded-full border-r-[#25b09b]"
+      class="loader grid h-[50px] w-[50px] rounded-full border-4 border-transparent border-r-[#25b09b]"
     />
   </div>
 </template>
 
 <style scoped>
 .loader {
-  aspect-ratio: 1;
   animation: l15 1s infinite linear;
+  aspect-ratio: 1;
 }
 
 .loader::before,
 .loader::after {
-  content: '';
   grid-area: 1/1;
+  animation: l15 2s infinite;
   margin: 2px;
   border: inherit;
   border-radius: 50%;
-  animation: l15 2s infinite;
+  content: '';
 }
 
 .loader::after {
-  margin: 8px;
   animation-duration: 3s;
+  margin: 8px;
 }
 
 @keyframes l15 {

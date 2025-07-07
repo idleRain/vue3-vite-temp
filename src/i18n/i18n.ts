@@ -1,11 +1,11 @@
-import { type Locale, createI18n } from 'vue-i18n'
-import type { App } from 'vue'
 import type {
   ImportLocaleFn,
   LoadMessageFn,
   LocaleSetupOptions,
   SupportedLanguagesType
 } from './typing'
+import { type Locale, createI18n } from 'vue-i18n'
+import type { App } from 'vue'
 
 const i18n = createI18n({
   globalInjection: true,

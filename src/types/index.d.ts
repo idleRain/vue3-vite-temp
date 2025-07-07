@@ -1,1 +1,1 @@
-export * from './modules/example'
+export * as example from './modules/example'

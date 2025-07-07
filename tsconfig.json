@@ -1,33 +1,90 @@
 {
+  // 继承 Vue 官方提供的基础 TypeScript 配置，适用于 DOM 环境
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
+    // 编译目标设置为最新的 ECMAScript 版本
     "target": "ESNext",
-    "useDefineForClassFields": true,
+    // 模块系统使用 ESNext (ES6+ 模块)
     "module": "ESNext",
-    "moduleResolution": "Node",
+    // 模块解析策略，Bundler 模式适用于现代打包工具如 Vite
+    "moduleResolution": "Bundler",
+    // 包含的类型库：最新 ES 特性、DOM API、DOM 迭代器
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    // 启用严格模式，包含所有严格类型检查
     "strict": true,
+    // 不生成编译后的 JS 文件，仅做类型检查
+    "noEmit": true,
+    // 保留 JSX 语法，交给其他工具处理（如 Vite）
     "jsx": "preserve",
+    // 不生成 .d.ts 声明文件
+    "declaration": false,
+    // 不生成声明文件的 source map
+    "declarationMap": false,
+    // 生成 source map 文件，便于调试
     "sourceMap": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    // 允许从没有默认导出的模块中默认导入
+    "allowSyntheticDefaultImports": true,
+    // 启用 ES 模块互操作性
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    // 强制文件名大小写一致性检查
+    "forceConsistentCasingInFileNames": true,
+    // 使用 defineProperty 定义类字段（符合 TC39 标准）
+    "useDefineForClassFields": true,
+    // 每个文件作为独立模块处理
+    "isolatedModules": true,
+    // 跳过库文件的类型检查，提升编译速度
     "skipLibCheck": true,
+    // 允许导入 JSON 模块
+    "resolveJsonModule": true,
+    // 允许导入 .ts 扩展名的文件
+    "allowImportingTsExtensions": true,
+    // 检查未使用的局部变量
+    "noUnusedLocals": true,
+    // 检查未使用的函数参数
+    "noUnusedParameters": true,
+    // 精确的可选属性类型检查
+    "exactOptionalPropertyTypes": true,
+    // 检查函数是否在所有代码路径上都有返回值
+    "noImplicitReturns": true,
+    // 检查 switch 语句中是否有 fallthrough 情况
+    "noFallthroughCasesInSwitch": true,
+    // 对索引访问进行未定义检查
+    "noUncheckedIndexedAccess": true,
+    // 检查继承时是否使用了 override 关键字
+    "noImplicitOverride": true,
+    // 设置基础路径为项目根目录
     "baseUrl": ".",
+    // 路径映射配置
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["./*"],
-      "$ui/*": ["./src/components/ui/*"]
-    }
+      "@/*": ["./src/*"],           // @ 映射到 src 目录
+      "~/*": ["./*"],               // ~ 映射到项目根目录
+      "$ui/*": ["./src/components/ui/*"]  // $ui 映射到 UI 组件目录
+    },
+    // 额外包含的类型定义
+    "types": ["vite/client", "node"]
   },
+  // 包含在编译中的文件模式
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "./components.d.ts",
-    "typings/*.d.ts",
-    "vite.config.ts"
+    "src/**/*.ts",          // 所有 TypeScript 文件
+    "src/**/*.d.ts",        // 所有类型声明文件
+    "src/**/*.tsx",         // 所有 TSX 文件
+    "src/**/*.vue",         // 所有 Vue 单文件组件
+    "src/**/*.js",          // 所有 JavaScript 文件
+    "src/**/*.jsx",         // 所有 JSX 文件
+    "src/**/*.json",        // 所有 JSON 文件
+    "src/**/*.json5",       // 所有 JSON5 文件
+    "typings/**/*.d.ts",    // 全局类型声明
+    "components.d.ts",      // 组件类型声明
+    "vite.config.ts",       // Vite 配置文件
+    "tailwind.config.js",   // Tailwind CSS 配置
+    "postcss.config.js",    // PostCSS 配置
+    "prettier.config.js",   // Prettier 配置
+    "eslint.config.js"      // ESLint 配置
+  ],
+  // 排除在编译之外的目录
+  "exclude": [
+    "node_modules",         // 依赖包目录
+    "dist",                 // 构建输出目录
+    "public"                // 静态资源目录
   ]
 }

@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import loading from '@/components/loading'
-import routes from './routes'
 import nProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import routes from './routes'
 
 const router = createRouter({
   history: createWebHistory(),

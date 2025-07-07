@@ -1,5 +1,4 @@
-import { createPinia } from 'pinia'
-import useExampleStore from '@/store/modules/example'
+import useExampleStore from './modules/example'
 
 const pinia = createPinia()
 

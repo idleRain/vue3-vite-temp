@@ -1,11 +1,11 @@
-import { type ConfigEnv, defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import tailwindcss from '@tailwindcss/vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { resolve } from 'node:path'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { type ConfigEnv, defineConfig, loadEnv } from 'vite'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import tailwindcss from '@tailwindcss/vite'
 import ViteJson5 from 'vite-plugin-json5'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'node:path'
 
 // https://vite.dev/config/
 export default ({ mode }: ConfigEnv) => {
@@ -38,7 +38,7 @@ export default ({ mode }: ConfigEnv) => {
       port: Number(env.VITE_SERVER_PORT),
       host: '0.0.0.0',
       proxy: {
-        [env.VITE_BASE_URL]: {
+        [env.VITE_BASE_URL as string]: {
           target: env.VITE_PROXY_URL,
           ws: true,
           changeOrigin: true,

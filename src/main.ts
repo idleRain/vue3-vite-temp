@@ -1,10 +1,11 @@
-import { createApp } from 'vue'
-import '@/styles/index.css'
 import 'element-plus/dist/index.css'
-import pinia from '@/store'
-import router from '@/router'
 import { setupI18n } from '@/i18n'
+import { createApp } from 'vue'
+import 'vue-sonner/style.css'
+import router from '@/router'
+import '@/styles/index.css'
 import App from './App.vue'
+import pinia from '@/store'
 
 const bootstrap = async () => {
   const app = createApp(App)

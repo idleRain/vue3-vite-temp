@@ -1,11 +1,11 @@
-import dayjs from 'dayjs'
-import enLocale from 'element-plus/es/locale/lang/en'
-import defaultLocale from 'element-plus/es/locale/lang/zh-cn'
-import type { LocaleSetupOptions, SupportedLanguagesType } from './locales'
-import type { Language } from 'element-plus/es/locale'
-import type { App } from 'vue'
 import { $t, setupI18n as coreSetup, loadLocalesMapFromDir } from './locales'
+import type { LocaleSetupOptions, SupportedLanguagesType } from './locales'
+import defaultLocale from 'element-plus/es/locale/lang/zh-cn'
+import type { Language } from 'element-plus/es/locale'
+import enLocale from 'element-plus/es/locale/lang/en'
 import { local } from '@/utils/storage'
+import type { App } from 'vue'
+import dayjs from 'dayjs'
 
 const elementLocale = ref<Language>(defaultLocale)
 

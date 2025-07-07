@@ -83,6 +83,7 @@ declare module 'vue' {
     FormMessage: typeof import('./src/components/ui/form/FormMessage.vue')['default']
     Input: typeof import('./src/components/ui/input/Input.vue')['default']
     Label: typeof import('./src/components/ui/label/Label.vue')['default']
+    LanguageToggle: typeof import('./src/components/System/LanguageToggle.vue')['default']
     Loading: typeof import('./src/components/loading/loading.vue')['default']
     Popover: typeof import('./src/components/ui/popover/Popover.vue')['default']
     PopoverAnchor: typeof import('./src/components/ui/popover/PopoverAnchor.vue')['default']
@@ -141,9 +142,11 @@ declare module 'vue' {
     Sonner: typeof import('./src/components/ui/sonner/Sonner.vue')['default']
     Switch: typeof import('./src/components/ui/switch/Switch.vue')['default']
     Textarea: typeof import('./src/components/ui/textarea/Textarea.vue')['default']
+    ThemeToggle: typeof import('./src/components/System/ThemeToggle.vue')['default']
     Tooltip: typeof import('./src/components/ui/tooltip/Tooltip.vue')['default']
     TooltipContent: typeof import('./src/components/ui/tooltip/TooltipContent.vue')['default']
     TooltipProvider: typeof import('./src/components/ui/tooltip/TooltipProvider.vue')['default']
     TooltipTrigger: typeof import('./src/components/ui/tooltip/TooltipTrigger.vue')['default']
+    UseTheme: typeof import('./src/components/UseTheme.vue')['default']
   }
 }

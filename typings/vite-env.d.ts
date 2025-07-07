@@ -10,4 +10,6 @@ declare interface ImportMetaEnv {
   readonly VITE_BASE_URL: string
   // APP 首选语言
   readonly VITE_APP_LOCALE: string
+  // 请求失败后重试次数
+  readonly VITE_RETRY_COUNT: number
 }
