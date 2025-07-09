@@ -55,6 +55,7 @@
     "@types/node": "^22.15.29",
     "@types/nprogress": "^0.2.3",
     "@vitejs/plugin-vue": "^6.0.0",
+    "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "@vue/compiler-sfc": "^3.5.16",
     "@vue/test-utils": "^2.4.6",
@@ -80,7 +81,7 @@
     "typescript-eslint": "^8.33.1",
     "unplugin-auto-import": "^19.3.0",
     "unplugin-vue-components": "^28.7.0",
-    "vite": "npm:rolldown-vite@7.0.6",
+    "vite": "npm:rolldown-vite@6",
     "vite-plugin-json5": "^1.1.9",
     "vitest": "^3.2.4",
     "vue-tsc": "^2.2.8"
