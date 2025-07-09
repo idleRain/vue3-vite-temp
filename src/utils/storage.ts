@@ -1,6 +1,6 @@
 type StorageType = {
-  set: <T>(key: string, value: T) => void
-  get: <T = string>(key: string) => T | null
+  set: (key: string, value: any) => void
+  get: <T = unknown>(key: string) => T | null
   rm: (key: string) => void
   clear: () => void
 }
@@ -9,9 +9,14 @@ type StorageType = {
  * 创建统一的 Storage 操作实例
  * @param storage - 使用的 Storage 实例（localStorage 或 sessionStorage）
  */
-const createStorage = (storage: Storage): StorageType => ({
+export const createStorage = (storage: Storage): StorageType => ({
   // 设置
-  set: <T>(key: string, value: T): void => {
+  set: (key: string, value: any): void => {
+    if (value === void 0) {
+      storage.setItem(key, JSON.stringify(null))
+      return
+    }
+
     try {
       const serialized = JSON.stringify(value)
       storage.setItem(key, serialized)
@@ -19,21 +24,24 @@ const createStorage = (storage: Storage): StorageType => ({
       console.warn(`Failed to serialize data for key "${key}"`, error)
     }
   },
+
   // 获取
-  get: <T = string>(key: string): T | null => {
+  get: <T = unknown>(key: string): T | null => {
+    const item = storage.getItem(key)
+    if (item === null) return null
+
     try {
-      const item = storage.getItem(key)
-      if (item === null) return null
       return JSON.parse(item) as T
     } catch {
-      // 返回原始字符串（非 JSON 格式）
-      return storage.getItem(key) as unknown as T
+      return item as unknown as T
     }
   },
+
   // 删除
   rm: (key: string): void => {
     storage.removeItem(key)
   },
+
   // 清空
   clear: (): void => {
     storage.clear()

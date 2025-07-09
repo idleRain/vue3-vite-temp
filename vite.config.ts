@@ -56,6 +56,7 @@ export default ({ mode }: ConfigEnv) => {
         $ui: resolve(__dirname, './src/components/ui')
       }
     },
+    // 打包构建配置
     build: {
       sourcemap: mode === 'dev',
       assetsDir: 'static/js',
@@ -65,9 +66,14 @@ export default ({ mode }: ConfigEnv) => {
           entryFileNames: 'static/js/[name]-[hash].js',
           assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
           // 单独打包的模块
-          manualChunks: {
-            vue: ['vue', 'vue-router', 'pinia', 'vue-i18n'],
-            elementPlus: ['element-plus']
+          advancedChunks: {
+            groups: [
+              { name: 'vue', test: /node_modules\/vue/ },
+              { name: 'vue-router', test: /node_modules\/vue-router/ },
+              { name: 'pinia', test: /node_modules\/pinia/ },
+              { name: 'vue-i18n', test: /node_modules\/vue-i18n/ },
+              { name: 'element-plus', test: /node_modules\/element-plus/ }
+            ]
           }
         }
       },
@@ -78,6 +84,29 @@ export default ({ mode }: ConfigEnv) => {
           drop_console: true,
           drop_debugger: true
         }
+      }
+    },
+    // vitest 配置
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.ts'],
+      coverage: {
+        provider: 'v8',
+        reporter: ['text', 'json', 'html'],
+        exclude: [
+          'node_modules/',
+          'src/test/',
+          '**/*.d.ts',
+          '**/*.config.*',
+          '**/vite.config.*',
+          '**/vitest.config.*',
+          '**/dist/**',
+          '**/build/**',
+          '**/.{idea,git,cache,output,temp}/**',
+          '**/coverage/**'
+        ],
+        include: ['src/**/*.{ts,vue}']
       }
     }
   })

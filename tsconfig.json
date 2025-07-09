@@ -41,7 +41,7 @@
     // 检查未使用的局部变量
     "noUnusedLocals": true,
     // 检查未使用的函数参数
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     // 精确的可选属性类型检查
     "exactOptionalPropertyTypes": true,
     // 检查函数是否在所有代码路径上都有返回值
@@ -61,7 +61,7 @@
       "$ui/*": ["./src/components/ui/*"]  // $ui 映射到 UI 组件目录
     },
     // 额外包含的类型定义
-    "types": ["vite/client", "node"]
+    "types": ["vite/client", "node", "vitest/globals"]
   },
   // 包含在编译中的文件模式
   "include": [
