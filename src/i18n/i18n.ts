@@ -14,15 +14,6 @@ const i18n = createI18n({
   messages: {}
 })
 
-/**
- * 支持 json 和 json5 格式语言包文件
- * 支持多层级目录的命名空间
- */
-const modules = import.meta.glob('../locales/**/*.json?(5)')
-const localesMap = loadLocalesMapFromDir(
-  /^\.\.\/locales\/([^/]+)\/(.*?)(?:\.json5?|\.json)$/,
-  modules
-)
 let loadMessages: LoadMessageFn
 
 /**
@@ -54,23 +45,19 @@ function loadLocalesMapFromDir(
   const localesRaw: Record<Locale, Record<string, () => Promise<unknown>>> = {}
   const localesMap: Record<Locale, ImportLocaleFn> = {}
 
-  // 迭代模块以提取语言和文件名
   for (const path in modules) {
     const match = path.match(regexp)
     if (match) {
       const [, locale, filePath] = match
       if (locale && filePath) {
         if (!localesRaw[locale]) localesRaw[locale] = {}
-        // 将路径拆分为数组
         const parts = filePath.split('/')
-        // 构建嵌套键路径
         const key = parts.join('.')
-        localesRaw[locale][key] = modules[path]
+        localesRaw[locale]![key] = modules[path]!
       }
     }
   }
 
-  // 将原始 locale 数据转换为异步导入函数
   for (const [locale, files] of Object.entries(localesRaw)) {
     localesMap[locale] = async () => {
       const messages: Record<string, any> = {}
@@ -79,15 +66,14 @@ function loadLocalesMapFromDir(
         const keys = key.split('.')
         let current = messages
 
-        // 逐级创建嵌套对象结构
         for (let i = 0; i < keys.length - 1; i++) {
-          const k = keys[i]
+          const k = keys[i]!
           if (!current[k]) current[k] = {}
           current = current[k]
         }
 
         const imported = (await importFn()) as { default: any }
-        current[keys[keys.length - 1]] = imported.default
+        current[keys[keys.length - 1]!] = imported.default
       }
 
       return { default: messages }
@@ -106,36 +92,55 @@ function setI18nLanguage(locale: Locale) {
   document?.querySelector('html')?.setAttribute('lang', locale)
 }
 
-async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
-  const { defaultLocale = 'zh' } = options
-  // app可以自行扩展一些第三方库和组件库的国际化
-  loadMessages = options.loadMessages || (async () => ({}))
-  app.use(i18n)
-  await loadLocaleMessages(defaultLocale)
+/**
+ * 加载语言
+ * @param lang
+ * @param localesMap
+ */
+async function loadLocaleMessages(
+  lang: SupportedLanguagesType,
+  localesMap: Record<Locale, ImportLocaleFn>
+) {
+  if (unref(i18n.global.locale) === lang) {
+    return setI18nLanguage(lang)
+  }
 
-  // 在控制台打印警告
+  const message = await localesMap[lang]?.()
+  if (message?.default) {
+    i18n.global.setLocaleMessage(lang, message.default)
+  }
+
+  const mergeMessage = await loadMessages(lang)
+  if (mergeMessage) {
+    i18n.global.mergeLocaleMessage(lang, mergeMessage)
+  }
+
+  return setI18nLanguage(lang)
+}
+
+/**
+ * 设置 i18n 实例
+ * @param app Vue 应用实例
+ * @param options 配置选项
+ */
+async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
+  loadMessages = options.loadMessages || (async () => ({}))
+
+  app.use(i18n)
+
   i18n.global.setMissingHandler((locale, key) => {
     if (options.missingWarn && key.includes('.')) {
       console.warn(`[intlify] Not found '${key}' key in '${locale}' locale messages.`)
     }
   })
-}
 
-/**
- * 加载语言
- * @param lang
- */
-async function loadLocaleMessages(lang: SupportedLanguagesType) {
-  if (unref(i18n.global.locale) === lang) {
-    return setI18nLanguage(lang)
+  return {
+    i18n,
+    loadLocaleMessages: (
+      lang: SupportedLanguagesType,
+      localesMap: Record<Locale, ImportLocaleFn>
+    ) => loadLocaleMessages(lang, localesMap)
   }
-  const message = await localesMap[lang]?.()
-  if (message?.default) {
-    i18n.global.setLocaleMessage(lang, message.default)
-  }
-  const mergeMessage = await loadMessages(lang)
-  i18n.global.mergeLocaleMessage(lang, mergeMessage)
-  return setI18nLanguage(lang)
 }
 
 export { i18n, loadLocaleMessages, loadLocalesMap, loadLocalesMapFromDir, setupI18n }

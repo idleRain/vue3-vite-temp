@@ -85,6 +85,7 @@
   "exclude": [
     "node_modules",         // 依赖包目录
     "dist",                 // 构建输出目录
-    "public"                // 静态资源目录
+    "public",               // 静态资源目录
+    "src/components"
   ]
 }

@@ -1,3 +1,5 @@
 {
-  "send": "Test Send Request"
+  "send": "Test Send Request",
+  sendOk: "Test Send Request Ok: {0}",
+  sendError: "Test Send Request Error: {0}",
 }

@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import type { SupportedLanguagesType } from '@/i18n/typing'
 import { Languages } from 'lucide-vue-next'
-import { local } from '@/utils/storage.ts'
+import { switchLanguage } from '@/i18n'
 
 const { t } = useI18n()
-
-const changeLanguage = (lang: SupportedLanguagesType) => {
-  local.set('lang', lang)
-  location.reload()
-}
 </script>
 
 <template>
@@ -21,8 +15,8 @@ const changeLanguage = (lang: SupportedLanguagesType) => {
     <DropdownMenuContent>
       <DropdownMenuLabel>{{ t('layout.languageSwitch') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem @click="changeLanguage('zh')">中文</DropdownMenuItem>
-      <DropdownMenuItem @click="changeLanguage('en')">English</DropdownMenuItem>
+      <DropdownMenuItem @click="switchLanguage('zh')">中文</DropdownMenuItem>
+      <DropdownMenuItem @click="switchLanguage('en')">English</DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 </template>
