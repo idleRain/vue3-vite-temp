@@ -57,7 +57,7 @@ export const deepClone = <T>(source: T, visited = new WeakMap()): T => {
     return cloned as T
   }
   // 数组或普通对象
-  const cloned = Array.isArray(source) ? [] : {}
+  const cloned: Array<any> | Record<any, any> = Array.isArray(source) ? [] : {}
   visited.set(source, cloned)
   // 递归克隆所有可枚举属性
   for (const key in source) {

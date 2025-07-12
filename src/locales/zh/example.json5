@@ -1,5 +1,7 @@
 {
- "send": "测试发送网络请求",
- sendOk: "发送成功: {0}",
- sendError: "发送失败: {0}",
+  "send": "测试发送网络请求",
+  "sendOk": "发送成功: {0}",
+  "sendError": "发送失败: {0}",
+  "clickAreaTest": "点击此区域测试 Click hook",
+  "clickPosition": "点击位置:"
 }

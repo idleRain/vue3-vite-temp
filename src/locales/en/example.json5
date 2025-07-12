@@ -1,5 +1,7 @@
 {
   "send": "Test Send Request",
-  sendOk: "Test Send Request Ok: {0}",
-  sendError: "Test Send Request Error: {0}",
+  "sendOk": "Test Send Request Ok: {0}",
+  "sendError": "Test Send Request Error: {0}",
+  "clickAreaTest": "Click this area to test Click hook",
+  "clickPosition": "Click Position:"
 }
